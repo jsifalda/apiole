@@ -1,0 +1,31 @@
+{
+  "name": "apiole",
+  "version": "0.1.0",
+  "description": "Lightweight lib which helps you to create API service from defined endpoints and make them callable.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf ./lib && ./node_modules/.bin/babel -e 0 ./src --out-dir ./lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsifalda/apiole.git"
+  },
+  "keywords": [
+    "api",
+    "api",
+    "provider",
+    "endpoints",
+    "service",
+    "apiole"
+  ],
+  "author": "Jiri Sifalda <sifalda.jiri@gmail.com> (http://jsifalda.name/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jsifalda/apiole/issues"
+  },
+  "homepage": "https://github.com/jsifalda/apiole#readme",
+  "devDependencies": {
+    "babel": "^5.8.3"
+  }
+}
