@@ -1,6 +1,7 @@
 let Apiole = ({
   provider,
-  logger = () => {}
+  logger = () => {},
+  validators = {}
 }) => {
 
   if (typeof provider === 'undefined') {
@@ -9,17 +10,47 @@ let Apiole = ({
 
   let endpoints = {}
   let baseUrl = ''
+  let defaults = {}
 
   let createProvider = (service) => {
 
     return (options) => {
 
       options = {
-        ...options,
-        url: baseUrl + options.url
+        ...defaults,
+        ...options
       }
 
+      Object.keys(validators).map((key) => {
+        let validator = validators[key]
+
+        if (validator && !Array.isArray(validator)) {
+          validator = [validator]
+        }
+
+        validator.map((validate) => {
+
+          if (typeof validate !== 'function') {
+            throw new Error(`Validator for ${ key } must be function`)
+          }
+
+          let value = validate(options[key])
+
+          options = {
+            ...options,
+            [key]: value
+          }
+        })
+      })
+
       return new Promise((resolve, reject) => {
+
+        options = {
+          ...options,
+          url: baseUrl + options.url
+        }
+
+        logger('Sending request to', options.url)
 
         service(options)
         .then((response) => {
@@ -48,6 +79,11 @@ let Apiole = ({
     return instance
   }
 
+  let setDefaults = (_defaults) => {
+    defaults = _defaults
+    return instance
+  }
+
   let create = () => {
     let service = {}
 
@@ -65,6 +101,7 @@ let Apiole = ({
   let instance = {
     endpoints: setEndpoints,
     baseUrl: setBaseUrl,
+    defaults: setDefaults,
     create
   }
 
