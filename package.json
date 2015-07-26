@@ -1,6 +1,6 @@
 {
   "name": "apiole",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Lightweight lib which helps you to create API service from defined endpoints and make them callable.",
   "main": "lib/index.js",
   "scripts": {
