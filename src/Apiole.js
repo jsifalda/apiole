@@ -54,16 +54,11 @@ let Apiole = ({
 
         service(options)
         .then((response) => {
-
-          logger('Request successful', response)
           resolve(response)
-
         })
         .catch((error) => {
-
-          logger(new Error('Request failed'), options, error)
+          logger(new Error(`Request ${ options.url } failed`), options, error)
           reject(error)
-
         })
       })
     }
