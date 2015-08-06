@@ -13,7 +13,7 @@ let buildPath = (value) => {
       throw new Error('First index of array has to be string - endpoint path!')
     }
 
-    path = path.replace(/(:(.[^\/]*))/g, (item) => {
+    path = path.replace(/(:(.[^\/]+))/g, (item) => {
       counter++
       return value[counter - 1] || item
     })
