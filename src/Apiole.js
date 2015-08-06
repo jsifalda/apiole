@@ -34,7 +34,7 @@ let Apiole = ({
             throw new Error(`Validator for ${ key } must be function`)
           }
 
-          let value = validate(options[key])
+          let value = validate(options[key], options)
 
           options = {
             ...options,
