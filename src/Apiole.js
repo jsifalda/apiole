@@ -46,11 +46,12 @@ let Apiole = ({
       return new Promise((resolve, reject) => {
 
         options = {
+          method: 'get', // defaults
           ...options,
           url: baseUrl + options.url
         }
 
-        logger('Sending request to', options.url)
+        logger(`Sending request to ${ options.url } with method '${ options.method }'`)
 
         service(options)
         .then((response) => {
