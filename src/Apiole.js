@@ -67,17 +67,17 @@ let Apiole = ({
 
   let setEndpoints = (_endpoints) => {
     endpoints = _endpoints
-    return instance
+    return this
   }
 
   let setBaseUrl = (_baseUrl) => {
     baseUrl = _baseUrl
-    return instance
+    return this
   }
 
   let setDefaults = (_defaults) => {
     defaults = _defaults
-    return instance
+    return this
   }
 
   let create = () => {
@@ -94,14 +94,12 @@ let Apiole = ({
     return service
   }
 
-  let instance = {
+  return {
     endpoints: setEndpoints,
     baseUrl: setBaseUrl,
     defaults: setDefaults,
     create
   }
-
-  return instance
 
 }
 
