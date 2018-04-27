@@ -74,15 +74,14 @@ let Apiole = ({ provider, logger = () => {}, validators = {} }) => {
   }
 
   let create = () => {
-    const service = createProvider(provider)
-
+    provider = createProvider(provider)
     Object.keys(endpoints).map((key) => {
-      service[key] = {
+      provider[key] = {
         ...endpoints[key](provider)
       }
     })
 
-    return service
+    return provider
   }
 
   return {
