@@ -1,9 +1,6 @@
-let Apiole = ({
-  provider,
-  logger = () => {},
-  validators = {}
-}) => {
+import isUrl from 'is-absolute-url'
 
+let Apiole = ({ provider, logger = () => {}, validators = {} }) => {
   if (typeof provider === 'undefined') {
     throw new Error('Please provide provider which will call requests (eg. reqwest) into api options.')
   }
@@ -13,9 +10,7 @@ let Apiole = ({
   let defaults = {}
 
   let createProvider = (service) => {
-
     return (options) => {
-
       options = {
         ...defaults,
         ...options
@@ -29,9 +24,8 @@ let Apiole = ({
         }
 
         validator.map((validate) => {
-
           if (typeof validate !== 'function') {
-            throw new Error(`Validator for ${ key } must be function`)
+            throw new Error(`Validator for ${key} must be function`)
           }
 
           let value = validate(options[key], options)
@@ -44,23 +38,22 @@ let Apiole = ({
       })
 
       return new Promise((resolve, reject) => {
-
         options = {
           method: 'get', // defaults
           ...options,
-          url: baseUrl + options.url
+          url: isUrl(options.url) ? options.url : baseUrl + options.url
         }
 
-        logger(`Sending request to ${ options.url } with method '${ options.method }'`)
+        logger(`Sending request to ${options.url} with method '${options.method}'`)
 
         service(options)
-        .then((response) => {
-          resolve(response)
-        })
-        .catch((error) => {
-          logger(new Error(`Request ${ options.url } failed`), options, error)
-          reject(error)
-        })
+          .then((response) => {
+            resolve(response)
+          })
+          .catch((error) => {
+            logger(new Error(`Request ${options.url} failed`), options, error)
+            reject(error)
+          })
       })
     }
   }
@@ -100,7 +93,6 @@ let Apiole = ({
     defaults: setDefaults,
     create
   }
-
 }
 
 export default Apiole
