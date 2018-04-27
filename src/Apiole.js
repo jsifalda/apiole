@@ -58,17 +58,17 @@ let Apiole = ({ provider, logger = () => {}, validators = {} }) => {
     }
   }
 
-  let setEndpoints = (_endpoints) => {
+  let setEndpoints = function(_endpoints) {
     endpoints = _endpoints
     return this
   }
 
-  let setBaseUrl = (_baseUrl) => {
+  let setBaseUrl = function(_baseUrl) {
     baseUrl = _baseUrl
     return this
   }
 
-  let setDefaults = (_defaults) => {
+  let setDefaults = function(_defaults) {
     defaults = _defaults
     return this
   }
