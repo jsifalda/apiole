@@ -37,24 +37,15 @@ let Apiole = ({ provider, logger = () => {}, validators = {} }) => {
         })
       })
 
-      return new Promise((resolve, reject) => {
-        options = {
-          method: 'get', // defaults
-          ...options,
-          url: isUrl(options.url) ? options.url : baseUrl + options.url
-        }
+      options = {
+        method: 'get', // defaults
+        ...options,
+        url: isUrl(options.url) ? options.url : baseUrl + options.url
+      }
 
-        logger(`Sending request to ${options.url} with method '${options.method}'`)
+      logger(`Sending request to ${options.url} with method '${options.method}'`)
 
-        service(options)
-          .then((response) => {
-            resolve(response)
-          })
-          .catch((error) => {
-            logger(new Error(`Request ${options.url} failed`), options, error)
-            reject(error)
-          })
-      })
+      return service(options)
     }
   }
 
